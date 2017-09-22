@@ -1,1 +1,1 @@
-This folder stores images for the README file.
+This folder stores images for the README.md
