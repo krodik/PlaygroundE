@@ -19,10 +19,11 @@ Download files under the develop branch by clicking Download ZIP. Then unzip the
 
 ### Step 2:
 
-Open Unity and sign in with a Unity account or skip that step. Then click "OPEN" in the Unity interface and select the unzipped folder
-"PlaygroundE".
+Open Unity and sign in with a Unity account or skip that step. Then click "OPEN" in the Unity interface. 
 
 ![2](ReadmeImage/2.jpg "2")
+
+Select the unzipped folder "PlaygroundE".
 
 ![3](ReadmeImage/3.png "3")
 
