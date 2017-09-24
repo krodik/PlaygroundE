@@ -80,7 +80,7 @@ namespace UnityEngine.Networking
 						ypos += spacing;
 					}
 
-					if (GUI.Button(new Rect(xpos, ypos, 105, 20), "LAN Client(C)"))
+					/*if (GUI.Button(new Rect(xpos, ypos, 105, 20), "LAN Client(C)"))
 					{
 						manager.StartClient();
 					}
@@ -101,7 +101,7 @@ namespace UnityEngine.Networking
 							manager.StartServer();
 						}
 						ypos += spacing;
-					}
+					}*/
 				}
 				else
 				{
@@ -167,7 +167,7 @@ namespace UnityEngine.Networking
 					return;
 				}
 
-				if (manager.matchMaker == null)
+				/*if (manager.matchMaker == null)
 				{
 					if (GUI.Button(new Rect(xpos, ypos, 200, 20), "Enable Match Maker (M)"))
 					{
@@ -256,7 +256,7 @@ namespace UnityEngine.Networking
 						manager.StopMatchMaker();
 					}
 					ypos += spacing;
-				}
+				}*/
 			}
 		}
 	}
