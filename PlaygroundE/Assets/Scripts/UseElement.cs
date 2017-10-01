@@ -21,7 +21,8 @@ public class UseElement : NetworkBehaviour {
     public GameObject Ept;
     public float EEEESpeed;
 
-    void recEle(char ele, int num)
+
+    public void recEle(char ele, int num)
     {
         char e = ele;
         switch (e)
@@ -47,7 +48,6 @@ public class UseElement : NetworkBehaviour {
         gameObject.GetComponentInChildren<SetText>().text3.text = numOfS.ToString();
         gameObject.GetComponentInChildren<SetText>().text4.text = numOfD.ToString();
         gameObject.GetComponentInChildren<SetText>().text5.text = numOfQ.ToString();
-
     }
 
     void clear()
