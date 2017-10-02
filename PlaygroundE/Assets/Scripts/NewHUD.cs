@@ -80,7 +80,7 @@ namespace UnityEngine.Networking
 						ypos += spacing;
 					}
 
-					/*if (GUI.Button(new Rect(xpos, ypos, 105, 20), "LAN Client(C)"))
+					if (GUI.Button(new Rect(xpos, ypos, 105, 20), "LAN Client(C)"))
 					{
 						manager.StartClient();
 					}
@@ -94,7 +94,7 @@ namespace UnityEngine.Networking
 						GUI.Box(new Rect(xpos, ypos, 200, 25), "(  WebGL cannot be server  )");
 						ypos += spacing;
 					}
-					else
+                    /*else
 					{
 						if (GUI.Button(new Rect(xpos, ypos, 200, 20), "LAN Server Only(S)"))
 						{
@@ -102,8 +102,8 @@ namespace UnityEngine.Networking
 						}
 						ypos += spacing;
 					}*/
-				}
-				else
+                }
+                else
 				{
 					GUI.Label(new Rect(xpos, ypos, 200, 20), "Connecting to " + manager.networkAddress + ":" + manager.networkPort + "..");
 					ypos += spacing;

@@ -21,7 +21,8 @@ public class UseElement : NetworkBehaviour {
     public GameObject Ept;
     public float EEEESpeed;
 
-    void recEle(char ele, int num)
+
+    public void recEle(char ele, int num)
     {
         char e = ele;
         switch (e)
@@ -47,7 +48,6 @@ public class UseElement : NetworkBehaviour {
         gameObject.GetComponentInChildren<SetText>().text3.text = numOfS.ToString();
         gameObject.GetComponentInChildren<SetText>().text4.text = numOfD.ToString();
         gameObject.GetComponentInChildren<SetText>().text5.text = numOfQ.ToString();
-
     }
 
     void clear()
@@ -131,6 +131,16 @@ public class UseElement : NetworkBehaviour {
         this.GetComponent<Stats>().Damage(-10f);
     }
     [Command]
+    void CmdAAAA()
+    {
+        this.GetComponent<Stats>().Damage(-10f);
+    }
+    [Command]
+    void CmdSSSS()
+    {
+        this.GetComponent<Stats>().Damage(-10f);
+    }
+    [Command]
     void CmdButton(string input, int next)
     {
         n = next;
@@ -150,14 +160,22 @@ public class UseElement : NetworkBehaviour {
         if (Input.GetMouseButtonDown(0)) // cast eles
         {
             int[] num = new int[6]; //  n_emp, n_w, n_a, n_s, n_d, n_q;
-            for(int k=0; k < 4; k++)
+            for(int k=0; k < 4; k++)    //num[] count how many of the specific element is casted 
             {
                 num[ele[k]] += 1; 
             }  /////////////////////////////////////////
             if (num[1] ==4)
             {
                 CmdWWWW();
-            } 
+            }
+            if (num[2] == 4)
+            {
+                CmdAAAA();
+            }
+            if (num[3] == 4)
+            {
+                CmdSSSS();
+            }
             if (num[0] ==4)  // bullet
             {
                 Vector3 a = Input.mousePosition - Camera.main.WorldToScreenPoint(this.transform.position);
