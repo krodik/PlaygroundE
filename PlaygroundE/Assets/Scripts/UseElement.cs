@@ -20,6 +20,10 @@ public class UseElement : NetworkBehaviour {
     public List<int> ele; // what elements player is holding;  0=none 1WBlue 2ARed 3SYellow 4DEarth 5QViod
     public GameObject Ept;
     public float EEEESpeed;
+    public GameObject Map;
+    public GameObject SkillBook;
+    private bool viewingMap;
+    private bool viewingP;
 
 
     public void recEle(char ele, int num)
@@ -65,6 +69,8 @@ public class UseElement : NetworkBehaviour {
 
     void Start()
     {
+        viewingMap = false;
+        viewingP = false;
         clear();
         if (isLocalPlayer)
         {
@@ -119,6 +125,7 @@ public class UseElement : NetworkBehaviour {
     void CmdEpt(Vector3 a)
     {
         GameObject bullet = Instantiate(Ept, this.transform.position, Quaternion.identity);
+        Ept.GetComponent<Hit>().owner = this.gameObject;
         a.z = 0;
         float temp = Mathf.Sqrt((a.x * a.x) + (a.y * a.y));
         bullet.GetComponent<Rigidbody>().velocity = new Vector3(a.x / temp, a.y / temp, 0) * EEEESpeed;
@@ -128,17 +135,16 @@ public class UseElement : NetworkBehaviour {
     [Command]
     void CmdWWWW()
     {
-        this.GetComponent<Stats>().Damage(-10f);
+        this.GetComponent<Stats>().Damage(-20f);
     }
     [Command]
     void CmdAAAA()
     {
-        this.GetComponent<Stats>().Damage(-10f);
     }
     [Command]
     void CmdSSSS()
     {
-        this.GetComponent<Stats>().Damage(-10f);
+        this.GetComponent<Move>().Speed = 10f;
     }
     [Command]
     void CmdButton(string input, int next)
@@ -156,6 +162,34 @@ public class UseElement : NetworkBehaviour {
         if (!isLocalPlayer)
         {
             return;
+        }
+        if (Input.GetButtonDown("P"))
+        {
+            if (viewingP == false)
+            {
+                GameObject viewP = Instantiate(SkillBook) as GameObject;
+                viewP.transform.SetParent(this.transform, false);
+                viewingP = true;
+            }
+            else
+            {
+                Destroy(this.transform.Find("SkillBook(Clone)").gameObject);
+                viewingP = false;
+            }
+
+        }
+        if (Input.GetButtonDown("M")) {
+            if (viewingMap == false)
+            {
+                GameObject viewMap = Instantiate(Map) as GameObject;
+                viewMap.transform.SetParent(this.transform, false);
+                viewingMap = true;
+            }
+            else {
+                Destroy(this.transform.Find("Map(Clone)").gameObject);
+                viewingMap = false;
+            }
+
         }
         if (Input.GetMouseButtonDown(0)) // cast eles
         {
