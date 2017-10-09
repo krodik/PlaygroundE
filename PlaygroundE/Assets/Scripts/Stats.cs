@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class Stats : NetworkBehaviour {
 
@@ -9,17 +10,24 @@ public class Stats : NetworkBehaviour {
     [SyncVar(hook = "OnChangeHealth")]public float cur_health;
     public GameObject healthBar;
     private float timer = 0f;
+    private GameObject NetPreb;
+    public GameObject Guide;
 
     void Start()
     {
         //max_health = 100;
         //cur_health = 100;
         OnChangeHealth(cur_health);
+        NetPreb = GameObject.Find("Network");
     }
 
     void Update()
     {
-        if (timer > 1f)
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        if (timer > 3f)
         {
             this.Damage(1.0f);
             timer = 0f;
@@ -35,18 +43,35 @@ public class Stats : NetworkBehaviour {
             return;
         }
         cur_health -= input;
-        if (cur_health < 0)
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     void OnChangeHealth(float health)
     {
-        var myHealth = health / max_health;
-        if (myHealth < 0) { myHealth = 0; }
-        if (myHealth > 1) { myHealth = 1; }
-        healthBar.transform.localScale = new Vector3(myHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        if (health < 0)
+        {
+            if (isLocalPlayer)
+            {
+                GameObject guide = Instantiate(Guide) as GameObject;
+                guide.transform.SetParent(this.transform.parent, false);
+                NetPreb.GetComponentInChildren<NewHUD>().manager.StopHost();
+                StartCoroutine(Restart());
+            }
+            if (isServer)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else
+        {
+            var myHealth = health / max_health;
+            if (myHealth < 0) { myHealth = 0; }
+            if (myHealth > 1) { myHealth = 1; }
+            healthBar.transform.localScale = new Vector3(myHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        }
+    }
+    IEnumerator Restart() {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Main");
     }
 
 }
